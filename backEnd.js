@@ -1,21 +1,20 @@
 const express = require('express');
-const { send } = require('process');
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+let i = 3;
 let shoppingList = [
     {
-        id: "777",
+        id: "1",
         name: "kotej"
     },
     {
-        id: "151",
+        id: "2",
         name: "tomato"
     },
     {
-        id: "123",
+        id: "3",
         name: "milk"
     }
 ];
