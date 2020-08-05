@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <style>
+        .del {
+            margin-left: 10px;
+            padding: 2px;
+            text-align: center;
+            background-color: rgba(240, 10, 10, 0.7);
+            box-shadow: 4px 3px 4px rgba(8, 8, 8, 0.23);
+            
+        }
+
+        .item {
+            font-size: 18px;
+            font-style: italic;
+            font-family: monospace;
+            margin: 5px;
+        }
+
+        .taken {
+            text-decoration: line-through;
+        }
+
+        #undo {
+            /* position: relative; */
+            margin-top: 50px;
+        }
+    </style>
+
+    <h1>Shopping List</h1>
+    <p>Type below an item and press the button to add it to the list</p>
+    Enter new item <input type="text">
+    <button id="add"> Add item </button>
+    <ul>
+        
+    </ul>
+    <button id="undo">undo</button>
+    <div id='pickUpHead' hidden>Pick Up:
+        <span id="pickUpMsg"></span>
+    </div>
+    <!-- <span id="undoMessage">nothing to undo</span> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="frontEnd.js"></script>
+</body>
+</html>

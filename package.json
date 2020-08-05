@@ -1,0 +1,24 @@
+{
+  "name": "FullStackTask-Amit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backEnd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmitNirGit/FullStackTask-Amit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmitNirGit/FullStackTask-Amit/issues"
+  },
+  "homepage": "https://github.com/AmitNirGit/FullStackTask-Amit#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
+  }
+}
