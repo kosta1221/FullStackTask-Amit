@@ -6,13 +6,12 @@ const pickUpHead = document.querySelector('#pickUpHead');
 const pickUpMsg = document.querySelector('#pickUpMsg');
 const undoStack = [];
 
-addButton.addEventListener("click", addItem);
+addButton.addEventListener("click", getItemFromInputField);
 undoButton.addEventListener("click", undo);
 document.addEventListener("keydown", detectActionKeys);
 
 //trying to fetch all items from the API
 getAllProducts();
-console.log("hi");
 function detectActionKeys(evtobj) {
     // let evtobj = window.event? event : e;
 
@@ -43,15 +42,9 @@ function updatePickUpList() {
     pickUpMsg.innerText = msg;
     
 }
-function addItem(newItem) {
-    // let newItem = inputfield.value;
-    // if(!newItem) {
-    //     // if the input field is empty alert and return
-    //     alert("Please enter a product!");
-    //     return;
-    // }
-    // inputfield.value = '';
 
+// adds item to HTML list
+function addItemToList(newItem) {
     // creating three new elements: list item(li), span tag(span) and delete button (deleteButton)
     let li = document.createElement('li');
     let span = document.createElement('span');
@@ -94,21 +87,41 @@ function addItem(newItem) {
     updatePickUpList();
     inputfield.focus();
 }
+
+// adds item to the server
+function addItemToServer(newItem) {
+    let listLength = list.childNodes.length;
+    axios.post('http://localhost:3000/products',
+    {
+        id: listLength+"",
+        name: newItem
+    }
+    );
+}
+
+function deleteItem() {
+    
+}
+// gets the string that's in the input field
 function getItemFromInputField() {
     let newItem = inputfield.value;
+    // add validation check with regex to check there are no numbers
     if(!newItem) {
         // if the input field is empty alert and return
-        alert("Please enter a product!");
+        alert("Please enter a valid product!");
         return;
     }
     inputfield.value = '';
-    addItem(newItem);
+    addItemToServer(newItem);
+    addItemToList(newItem);
 }
+
+// gets all products from the server and makes a list of them
 function getAllProducts() {
     axios.get("http://localhost:3000/products")
     .then(res => {
         const products = res.data;
-        products.forEach(product => addItem(product.name));
+        products.forEach(product => addItemToList(product.name));
     })
     .catch(err => console.log(err));
 }
