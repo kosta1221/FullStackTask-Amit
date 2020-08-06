@@ -49,13 +49,12 @@ function addItemToList(newProduct) {
     // creating three new elements: list item(li), span tag(span) and delete button (deleteButton)
     let li = document.createElement('li');
     let span = document.createElement('span');
+    let editField = document.createElement('input');
     let deleteButton = document.createElement('button');
     let checkbox = document.createElement('input');
 
     // adding the span tag that'll wrap the text later, the delete button and the checkbox
-    li.appendChild(checkbox)
-    li.appendChild(span);
-    li.appendChild(deleteButton);
+    li.append(checkbox, span, editField, deleteButton);
 
     span.innerText = name; // inserting the input text to the list item
     deleteButton.innerText = "Delete"; // inserting 'delete' text to the button
@@ -63,7 +62,7 @@ function addItemToList(newProduct) {
     deleteButton.classList.add("del"); // adding 'del' class to each delete button to later style it
     li.id = `product${id}`; // inserting a unique id to each li
     checkbox.type = "checkbox";
-    
+    editField.classList.add('editF'); // hide editField
 
     // appending the new list item to the list, and pushing it to the end of the not picked up items array
     list.appendChild(li);
@@ -87,6 +86,7 @@ function addItemToList(newProduct) {
         updatePickUpList();
         // alert(txt.innerText);
     });
+    span.addEventListener('click', () => updateItem(span, editField));
 
     updatePickUpList();
     inputfield.focus();
@@ -102,10 +102,24 @@ function addProductToServer(newProduct) {
     axios.post('http://localhost:3000/products', newItem);
 
     return newItem;
+
+
+
 }
 
 function deleteItem() {
 
+}
+
+// updates the content of an item (both sides)
+function updateItem(s, ef) {
+    // let ef = li.querySelector('input[type=text]');
+    // let s = li.querySelector('span');
+
+    s.style.display = "none"; // hide span
+    ef.style.display = "inline"; // reveal edit field
+    ef.focus();
+    ef.value = s.innerText;
 }
 // gets the string that's in the input field
 function getItemFromInputField() {
