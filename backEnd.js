@@ -49,7 +49,7 @@ app.put('/products/:id', (req, res) => {
 app.delete('/products/:id', (req, res) => {
     shoppingList.forEach((product, i) => {
         if (product.id === req.params.id) {
-            shoppingList.splice(i);
+            shoppingList.splice(i, 1);
             res.send(req.params.id + " id was deleted");
         }
     });

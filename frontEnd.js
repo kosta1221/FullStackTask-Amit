@@ -44,7 +44,8 @@ function updatePickUpList() {
 }
 
 // adds item to HTML list
-function addItemToList(newItem) {
+function addItemToList(newProduct) {
+    let {id, name} = newProduct; // destructing new product
     // creating three new elements: list item(li), span tag(span) and delete button (deleteButton)
     let li = document.createElement('li');
     let span = document.createElement('span');
@@ -56,21 +57,24 @@ function addItemToList(newItem) {
     li.appendChild(span);
     li.appendChild(deleteButton);
 
-    span.innerText = newItem; // inserting the input text to the list item
+    span.innerText = name; // inserting the input text to the list item
     deleteButton.innerText = "Delete"; // inserting 'delete' text to the button
     span.classList.add("item"); // adding 'item' class to each span tag to later span the text within
     deleteButton.classList.add("del"); // adding 'del' class to each delete button to later style it
+    li.id = `product${id}`; // inserting a unique id to each li
     checkbox.type = "checkbox";
+    
 
     // appending the new list item to the list, and pushing it to the end of the not picked up items array
     list.appendChild(li);
     
     pickUpHead.hidden = false;
-    // deleteButton.addEventListener("click", e => li.remove())
     deleteButton.addEventListener("click", function(){
-        undoStack.push(li);
+        /*undoStack.push(li);
         li.hidden = true;
-        updatePickUpList();
+        updatePickUpList();*/
+        axios.delete(`http://localhost:3000/products/${li.id.substring(7)}`);
+        li.remove();
     });
     checkbox.addEventListener("change", function(e){
         let txt = e.target.nextSibling;
@@ -89,30 +93,31 @@ function addItemToList(newItem) {
 }
 
 // adds item to the server
-function addItemToServer(newItem) {
+function addProductToServer(newProduct) {
     let listLength = list.childNodes.length;
-    axios.post('http://localhost:3000/products',
-    {
+    let newItem = {
         id: listLength+"",
-        name: newItem
+        name: newProduct
     }
-    );
+    axios.post('http://localhost:3000/products', newItem);
+
+    return newItem;
 }
 
 function deleteItem() {
-    
+
 }
 // gets the string that's in the input field
 function getItemFromInputField() {
-    let newItem = inputfield.value;
+    let newProduct = inputfield.value;
     // add validation check with regex to check there are no numbers
-    if(!newItem) {
+    if(!newProduct) {
         // if the input field is empty alert and return
         alert("Please enter a valid product!");
         return;
     }
     inputfield.value = '';
-    addItemToServer(newItem);
+    let newItem = addProductToServer(newProduct);
     addItemToList(newItem);
 }
 
@@ -121,7 +126,7 @@ function getAllProducts() {
     axios.get("http://localhost:3000/products")
     .then(res => {
         const products = res.data;
-        products.forEach(product => addItemToList(product.name));
+        products.forEach(product => addItemToList(product));
     })
     .catch(err => console.log(err));
 }
