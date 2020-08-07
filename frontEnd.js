@@ -86,7 +86,8 @@ function addItemToList(newProduct) {
         updatePickUpList();
         // alert(txt.innerText);
     });
-    span.addEventListener('click', () => updateItem(span, editField));
+    span.addEventListener('click', () => revealUpdateField(span, editField));
+    editField.addEventListener('blur', () => updateItem(span, editField, id))
 
     updatePickUpList();
     inputfield.focus();
@@ -103,8 +104,6 @@ function addProductToServer(newProduct) {
 
     return newItem;
 
-
-
 }
 
 function deleteItem() {
@@ -112,14 +111,36 @@ function deleteItem() {
 }
 
 // updates the content of an item (both sides)
-function updateItem(s, ef) {
-    // let ef = li.querySelector('input[type=text]');
-    // let s = li.querySelector('span');
-
+function revealUpdateField(s, ef) {
     s.style.display = "none"; // hide span
     ef.style.display = "inline"; // reveal edit field
     ef.focus();
     ef.value = s.innerText;
+
+}
+
+async function updateItem(s, ef, id) {
+    let newProduct = await ef.value;
+
+    if(!/[a-zA-z]/g.test(newProduct)) {
+        ef.focus();
+        // let errMsg = document.createElement('span');
+        // errMsg.innerText = "please enter a valid product";
+        // ef.appendChild(errMsg);
+        return;
+    }
+    else {
+    let newli = {
+        name: newProduct,
+        id: id
+    }
+    axios.put(`http://localhost:3000/products/${newli.id}`, newli);
+    s.innerText = newProduct;
+    s.style.display = "inline"
+    ef.style.display = "none";
+    updatePickUpList();
+    }
+
 }
 // gets the string that's in the input field
 function getItemFromInputField() {
