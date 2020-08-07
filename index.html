@@ -9,8 +9,23 @@
 
 <body>
     <style>
+        ul { 
+            display: flex;
+            flex-direction: column;
+        }
+
+        li {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 6px 0 6px 0;
+            width: 400px;
+        }
+
         .del {
-            margin-left: 10px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: 10px;
             padding: 2px;
             text-align: center;
             background-color: rgba(240, 10, 10, 0.7);
@@ -27,6 +42,7 @@
             font-size: 18px;
             font-style: italic;
             font-family: monospace;
+            margin-left: 10px;
         }
 
         .UDerr:focus {
@@ -37,7 +53,7 @@
             font-size: 18px;
             font-style: italic;
             font-family: monospace;
-            margin: 5px;
+            margin-left: 10px;
             cursor: pointer;
         }
 
@@ -45,10 +61,6 @@
             text-decoration: line-through;
         }
 
-        #undo {
-            /* position: relative; */
-            margin-top: 50px;
-        }
     </style>
 
     <h1>Shopping List</h1>
@@ -62,11 +74,9 @@
     <ul>
         
     </ul>
-    <!-- <button id="undo">undo</button> -->
     <div id='pickUpHead' hidden>Pick Up:
         <span id="pickUpMsg"></span>
     </div>
-    <!-- <span id="undoMessage">nothing to undo</span> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="frontEnd.js"></script>
 </body>
