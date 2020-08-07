@@ -1,33 +1,16 @@
 const list = document.querySelector('ul');
 const inputfield = document.querySelector('input[type=text]');
 const addButton = document.querySelector('#add');
-const undoButton = document.querySelector('#undo');
 const pickUpHead = document.querySelector('#pickUpHead');
 const pickUpMsg = document.querySelector('#pickUpMsg');
-const undoStack = [];
 
 addButton.addEventListener("click", getItemFromInputField);
-undoButton.addEventListener("click", undo);
 document.addEventListener("keydown", detectActionKeys);
 
 //trying to fetch all items from the API
 getAllProducts();
 function detectActionKeys(evtobj) {
-    // let evtobj = window.event? event : e;
-
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) undo(); // Checks if ctrl && z are pressed at the same time
     if (evtobj.keyCode == 13) getItemFromInputField(); // checks if enter is pressed
-}
-
-function undo() {
-    // if the stack is empty alert and return
-    if(!undoStack[0]) { 
-        alert("Nothing to undo!");
-        updatePickUpList();
-        return;
-    }
-    undoStack.pop().hidden = false;
-    updatePickUpList();
 }
 
 function updatePickUpList() {
@@ -69,9 +52,6 @@ function addItemToList(newProduct) {
     
     pickUpHead.hidden = false;
     deleteButton.addEventListener("click", function(){
-        /*undoStack.push(li);
-        li.hidden = true;
-        updatePickUpList();*/
         axios.delete(`http://localhost:3000/products/${li.id.substring(7)}`);
         li.remove();
     });
@@ -106,10 +86,6 @@ function addProductToServer(newProduct) {
 
 }
 
-function deleteItem() {
-
-}
-
 // updates the content of an item (both sides)
 function revealUpdateField(s, ef) {
     s.style.display = "none"; // hide span
@@ -119,17 +95,16 @@ function revealUpdateField(s, ef) {
 
 }
 
-async function updateItem(s, ef, id) {
-    let newProduct = await ef.value;
+function updateItem(s, ef, id) {
+    let newProduct = ef.value;
 
     if(!/[a-zA-z]/g.test(newProduct)) {
         ef.focus();
-        // let errMsg = document.createElement('span');
-        // errMsg.innerText = "please enter a valid product";
-        // ef.appendChild(errMsg);
+        ef.classList.add('UDerr');
+        setTimeout( () => ef.classList.remove('UDerr'), 1500);
         return;
     }
-    else {
+
     let newli = {
         name: newProduct,
         id: id
@@ -139,7 +114,6 @@ async function updateItem(s, ef, id) {
     s.style.display = "inline"
     ef.style.display = "none";
     updatePickUpList();
-    }
 
 }
 // gets the string that's in the input field

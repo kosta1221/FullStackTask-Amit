@@ -23,6 +23,16 @@
             border: none;
         }
 
+        .editF:focus {
+            font-size: 18px;
+            font-style: italic;
+            font-family: monospace;
+        }
+
+        .UDerr:focus {
+            outline-color: red;
+        }
+
         .item {
             font-size: 18px;
             font-style: italic;
@@ -42,13 +52,17 @@
     </style>
 
     <h1>Shopping List</h1>
-    <p>Type below an item and press the button to add it to the list</p>
+    <p>Type below an item and click the button to add it to the list <br/>
+        Check the box to mark the item as piked up.<br/>
+        Click an item to change it.<br/>
+        Delete an iten using the delete button.
+    </p>
     Enter new item <input type="text">
     <button id="add"> Add item </button>
     <ul>
         
     </ul>
-    <button id="undo">undo</button>
+    <!-- <button id="undo">undo</button> -->
     <div id='pickUpHead' hidden>Pick Up:
         <span id="pickUpMsg"></span>
     </div>
