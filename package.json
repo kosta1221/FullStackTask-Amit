@@ -1,24 +1,30 @@
 {
-  "name": "FullStackTask-Amit",
-  "version": "1.0.0",
-  "description": "",
-  "main": "backEnd.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AmitNirGit/FullStackTask-Amit.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AmitNirGit/FullStackTask-Amit/issues"
-  },
-  "homepage": "https://github.com/AmitNirGit/FullStackTask-Amit#readme",
-  "dependencies": {
-    "axios": "^0.19.2",
-    "express": "^4.17.1"
-  }
+	"name": "FullStackTask-Amit",
+	"version": "1.0.0",
+	"description": "",
+	"main": "backEnd.js",
+	"scripts": {
+		"test": "jest --verbose"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AmitNirGit/FullStackTask-Amit.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/AmitNirGit/FullStackTask-Amit/issues"
+	},
+	"homepage": "https://github.com/AmitNirGit/FullStackTask-Amit#readme",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"jest": "^26.6.3",
+		"nock": "^13.0.7",
+		"nock-puppeteer": "^1.0.2",
+		"puppeteer": "^7.1.0"
+	}
 }
