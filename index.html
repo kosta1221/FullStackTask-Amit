@@ -1,83 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
 
-</head>
+	<body>
+		<style>
+			ul {
+				display: flex;
+				flex-direction: column;
+			}
 
-<body>
-    <style>
-        ul { 
-            display: flex;
-            flex-direction: column;
-        }
+			li {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				margin: 6px 0 6px 0;
+				width: 400px;
+			}
 
-        li {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin: 6px 0 6px 0;
-            width: 400px;
-        }
+			.del {
+				cursor: pointer;
+				margin-left: auto;
+				margin-right: 10px;
+				padding: 2px;
+				text-align: center;
+				background-color: rgba(240, 10, 10, 0.7);
+				box-shadow: 4px 3px 4px rgba(8, 8, 8, 0.23);
+			}
 
-        .del {
-            cursor: pointer;
-            margin-left: auto;
-            margin-right: 10px;
-            padding: 2px;
-            text-align: center;
-            background-color: rgba(240, 10, 10, 0.7);
-            box-shadow: 4px 3px 4px rgba(8, 8, 8, 0.23);
-            
-        }
+			.editF {
+				display: none;
+				border: none;
+			}
 
-        .editF {
-            display: none;
-            border: none;
-        }
+			.editF:focus {
+				font-size: 18px;
+				font-style: italic;
+				font-family: monospace;
+				margin-left: 10px;
+			}
 
-        .editF:focus {
-            font-size: 18px;
-            font-style: italic;
-            font-family: monospace;
-            margin-left: 10px;
-        }
+			.UDerr:focus {
+				outline-color: red;
+			}
 
-        .UDerr:focus {
-            outline-color: red;
-        }
+			.item {
+				font-size: 18px;
+				font-style: italic;
+				font-family: monospace;
+				margin-left: 10px;
+				cursor: pointer;
+			}
 
-        .item {
-            font-size: 18px;
-            font-style: italic;
-            font-family: monospace;
-            margin-left: 10px;
-            cursor: pointer;
-        }
+			.taken {
+				text-decoration: line-through;
+			}
+		</style>
 
-        .taken {
-            text-decoration: line-through;
-        }
-
-    </style>
-
-    <h1>Shopping List</h1>
-    <p>Type below an item and click the button to add it to the list <br/>
-        Check the box to mark the item as piked up.<br/>
-        Click an item to change it.<br/>
-        Delete an iten using the delete button.
-    </p>
-    Enter new item <input type="text">
-    <button id="add"> Add item </button>
-    <ul>
-        
-    </ul>
-    <div id='pickUpHead' hidden>Pick Up:
-        <span id="pickUpMsg"></span>
-    </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="frontEnd.js"></script>
-</body>
+		<h1>Shopping List</h1>
+		<p>
+			Type below an item and click the button to add it to the list <br />
+			Check the box to mark the item as piked up.<br />
+			Click an item to change it.<br />
+			Delete an iten using the delete button.
+		</p>
+		Enter new item <input type="text" />
+		<button id="add">Add item</button>
+		<ul></ul>
+		<div id="pickUpHead" hidden>
+			Pick Up:
+			<span id="pickUpMsg"></span>
+		</div>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="frontEnd.js"></script>
+	</body>
 </html>
